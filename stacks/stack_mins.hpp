@@ -1,7 +1,7 @@
+#include <functional>
 #include <stack>
 #include <vector>
 
-// TODO: allow general comparators as input
 // TODO: remove copying overhead
 
 /**
@@ -10,17 +10,21 @@
  * 
  * Note: may involve copying to objects.
  */
-template <class Comparable>
+template <typename Comparable, typename Compare = std::less<Comparable> >
 class stack_mins {
 private:
     std::vector<Comparable> main_stack;     // actual values
     std::stack<std::size_t> mins_stack;     // index of mins
 public:
+    
+    Compare comp;
+    stack_mins() : comp(Compare()) {}
+    
     /**
        Add an element to the stack.
      */
     void push(const Comparable &x) {
-        if ( mins_stack.empty() || x < main_stack[mins_stack.top()] )
+        if ( mins_stack.empty() || comp(x, main_stack[mins_stack.top()]) )
             mins_stack.push(main_stack.size());
         main_stack.push_back(x);
     }
