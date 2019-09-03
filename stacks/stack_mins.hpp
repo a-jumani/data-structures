@@ -8,7 +8,7 @@
  * Stack data structure like std::stack but additionally
  * supports get_min().
  * 
- * Note: may involve copying to objects.
+ * Note: may involve copying of Comparable objects.
  */
 template <typename Comparable, typename Compare = std::less<Comparable> >
 class stack_mins {
