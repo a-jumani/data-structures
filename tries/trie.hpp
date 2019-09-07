@@ -15,8 +15,28 @@ private:
     std::size_t is_end[size];
     trie<base, size, prefix> *children[size];
 
+    inline size_t get_index(char c) const { return c - base; }
+
+    // preconditions:
+    //   i < x.size()
     void insert(const std::string &x, size_t i) {
-        // code
+        
+        const std::size_t index = get_index(x[i]);
+
+        // base case
+        if ( x.size() - 1 == i ) {
+            ++is_end[index];
+            return;
+        }
+
+        // track prefix
+        if ( prefix )
+            ++is_end[index];
+        
+        // add x[i+1:]
+        if ( nullptr == children[index] )
+            children[index] = new trie<base, size, prefix>();
+        children[index]->insert(x, i+1);
     }
 
     std::size_t search(const std::string &x, size_t i) const {
