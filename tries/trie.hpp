@@ -40,7 +40,18 @@ private:
     }
 
     std::size_t search(const std::string &x, size_t i) const {
-        // code
+        
+        const std::size_t index = get_index(x[i]);
+
+        // base case
+        if ( x.size() -1 == i )
+            return is_end[index];
+        
+        // search x[i+1:] in children
+        if ( nullptr != children[index] )
+            return children[index]->search(x, i+1);
+        
+        return false;
     }
 
 public:
