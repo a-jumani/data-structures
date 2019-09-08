@@ -64,7 +64,12 @@ public:
         }
     }
     
-    ~trie() {}
+    ~trie() {
+        // delete all children tries
+        for ( std::size_t i = 0; i < size; ++i )
+            if ( nullptr != children[i])
+                delete children[i];
+    }
     
     /**
      * Insert string into trie.
