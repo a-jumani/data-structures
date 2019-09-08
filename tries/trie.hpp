@@ -9,7 +9,7 @@
  * size     size of the alphabet
  * prefix   if true, track prefixes
  */
-template <char base = 'a', std::size_t size = 26UL, bool prefix = false>
+template <char base = 0, std::size_t size = 128UL, bool prefix = false>
 class trie {
 private:
     std::size_t is_end[size];
