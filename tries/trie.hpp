@@ -63,6 +63,12 @@ public:
             children[i] = nullptr;
         }
     }
+
+    // disable copy and move
+    trie(const trie &t) = delete;
+    trie(trie &&t) = delete;
+    trie &operator= (const trie &t) = delete;
+    trie &operator= (trie &&t) = delete;
     
     ~trie() {
         // delete all children tries
