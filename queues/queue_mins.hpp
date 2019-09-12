@@ -1,4 +1,5 @@
 #include <deque>
+#include <functional>
 #include <queue>
 
 /**
@@ -8,13 +9,16 @@
  * Note: tt doesn't support MoveInsertable objects, i.e.
  * copies of objects are made.
  */
-template <typename Comparable>
+template <typename Comparable, typename Compare = std::less<Comparable> >
 class queue_mins {
 private:
     std::queue<Comparable> main_queue;      // actual values
     std::deque<Comparable> mins_deque;      // mins
 
 public:
+
+    Compare comp;
+    queue_mins() : comp(Compare()) {}
     
     /**
        Add an element to the queue.
@@ -25,7 +29,7 @@ public:
         main_queue.push(x);
 
         // update mins
-        while ( !mins_deque.empty() && x < mins_deque.back() )
+        while ( !mins_deque.empty() && comp(x, mins_deque.back()) )
             mins_deque.pop_back();
         mins_deque.push_back(x);
     }
