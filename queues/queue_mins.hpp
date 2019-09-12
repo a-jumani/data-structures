@@ -1,3 +1,6 @@
+#include <deque>
+#include <queue>
+
 /**
  * Queue data structure like std::queue but additionally
  * supports get_min().
@@ -7,47 +10,60 @@
  */
 template <typename Comparable>
 class queue_mins {
+private:
+    std::queue<Comparable> main_queue;      // actual values
+    std::deque<Comparable> mins_deque;      // mins
+
 public:
     
     /**
        Add an element to the queue.
      */
     void push(const Comparable &x) {
-        //code
+
+        // add to queue
+        main_queue.push(x);
+
+        // update mins
+        while ( !mins_deque.empty() && x < mins_deque.back() )
+            mins_deque.pop_back();
+        mins_deque.push_back(x);
     }
 
     /**
      * Remove element from front of the queue.
      */
     void pop(void) {
-        // code
+        if ( mins_deque.front() == main_queue.front() )
+            mins_deque.pop_front();
+        main_queue.pop();
     }
 
     /**
      * Get element from front of queue.
      */
     Comparable &front(void) {
-        // code
+        return main_queue.front();
     }
 
     /**
      * Get min of all elements present in the queue.
      */
     Comparable &get_min(void) {
-        // code
+        return mins_deque.front();
     }
 
     /**
      * Check queue is empty.
      */
     bool empty(void) const {
-        // code
+        return ( main_queue.empty() );
     }
 
     /**
      * Get queue size.
      */
     std::size_t size(void) const {
-        // code
+        return main_queue.size();
     }
 };
