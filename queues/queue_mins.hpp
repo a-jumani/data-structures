@@ -6,7 +6,7 @@
  * Queue data structure like std::queue but additionally
  * supports get_min().
  * 
- * Note: tt doesn't support MoveInsertable objects, i.e.
+ * Note: it doesn't support MoveInsertable objects, i.e.
  * copies of objects are made.
  */
 template <typename Comparable, typename Compare = std::less<Comparable> >
