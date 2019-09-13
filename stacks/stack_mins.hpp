@@ -13,7 +13,7 @@ private:
     std::stack<std::size_t> mins_stack;     // index of mins
     
     // update current min, if needed, for to-be inserted Comparable object
-    void update_min(Comparable &x) {
+    void update_min(const Comparable &x) {
         if ( mins_stack.empty() || comp(x, main_stack[mins_stack.top()]) )
             mins_stack.push(main_stack.size());
     }
