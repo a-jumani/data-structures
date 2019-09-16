@@ -11,6 +11,7 @@ class stack_mins {
 private:
     std::vector<Comparable> main_stack;     // actual values
     std::stack<std::size_t> mins_stack;     // index of mins
+    const Compare comp;                     // comparator
     
     // update current min, if needed, for to-be inserted Comparable object
     void update_min(const Comparable &x) {
@@ -20,7 +21,6 @@ private:
 
 public:
     
-    Compare comp;
     stack_mins() : comp(Compare()) {}
     
     /**

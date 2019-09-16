@@ -14,10 +14,10 @@ class queue_mins {
 private:
     std::queue<Comparable> main_queue;      // actual values
     std::deque<Comparable> mins_deque;      // mins
+    const Compare comp;                     // comparator
 
 public:
 
-    Compare comp;
     queue_mins() : comp(Compare()) {}
     
     /**
